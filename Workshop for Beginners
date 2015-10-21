@@ -18,6 +18,9 @@
 
 ## 4. Data frames and vectors (basics)
 
+?
+# = comments
+
 ?c
 
 my_first_vector <- c(1, 2, 3, 4, 5)
@@ -115,11 +118,11 @@ plot(m1,3)
 plot(m1,4)
 plot(m1)
 plot(Fertility, main="Regression of Fertility on Education", xlab = "Education", ylab="Fertility")
-abline(m1, col=2)                                   # abline adds a line on your plot
+plot(residuals(m1))
 
 ## 4. Multiple linear regression:
 
-m2 <- lm(swiss$Fertility ~ Education + Agriculture) # Multiple linear regression
+m2 <- lm(swiss$Fertility ~ Education + Agriculture, data = swiss) # Multiple linear regression
 summary(m2)
 plot(residuals(m2))
 
@@ -139,15 +142,26 @@ anova(m1, m2) # ANOVA which tests whether m2 is better model than m1
 
 # Data manipulation (optional)
 
+?mean
 mean(Education)
+?summary
 summary(Education)
 plot(density(Education))
 
 Education_class <- "I don't know yet"
+Education_class
 Education_class[Education <= 10] <- "Average"
+Education_class
 Education_class[Education > 10] <- "Advance"
+Education_class
+?table
+?factor
 table(Education_class)
 factor(Education_class)
+
+
+#######################################################################################################
+
 
 # Logistic regression with Education that is factored (opitional)
 
