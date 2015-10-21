@@ -1,0 +1,217 @@
+# BUSC Workshop R for Beginners
+
+### Outline:
+# 1. Introduce R
+# 2. Install R and R studio
+# 3. Introduce R studio environment
+# 4. Introduce vectors and data frames
+# 5. Vector and data frame exercises
+# 6. Introduce packages
+# 7. Introduce importing data 
+# 8. Data Analysis / Chalkboard introduction to regression y ~ XB
+# 9. Introduction to data frames and vectors (optional)
+# 10. Exercises
+
+
+#######################################################################################################
+
+
+## 4. Data frames and vectors (basics)
+
+?c
+
+my_first_vector <- c(1, 2, 3, 4, 5)
+my_first_vector
+my_second_vector <- c("my", "second", "vector", "is", "cool")
+my_second_vector
+
+?data.frame
+mydata <- data.frame(my_first_vector, my_second_vector)
+mydata
+write.csv(mydata, file = "mydata.csv", row.names = FALSE)
+
+## 5. Exercise
+# 1. Get into groups of 5 people
+# 2. Ask what everyone's first name is
+# 3. Create a vector with everyone's first name
+# 4. Ask for everyone's age
+# 5. Make another vector in the same order of the first name's with everyone's name
+# 6. Make a data.frame
+# 7. Make a csv file
+
+your.name <- c("a", "b", "c", "d", "e", "f")
+your.age <- c("1", "2", "3", "4", "5", "6")
+submit <- data.frame(your.name, your.age)
+write.csv(submit, file = "ages.csv", row.names = FALSE)
+
+
+#######################################################################################################
+
+
+## 6. Loading Packages
+
+# 1. Install packages either using package button or script
+# 2. Import library
+
+install.packages('faraway')
+install.packages('alr4')
+library(alr4)
+library(faraway)
+
+
+#######################################################################################################
+
+## 7. Data importing
+
+# 1. Make a folder called R on your desktop
+# 2. Save your R program in the R folder on your desktop
+# 3. Download "swiss.csv" on the www.bustats.com and put it into your R file
+
+
+setwd("~/Desktop/R")            # Set work directory
+list.files()                    # Check files in work directory
+swiss <- read.csv("swiss.csv")  # Import csv "swiss" data set
+?swiss                          # Ask R what the "swiss" data set is about
+
+# = comments
+
+
+#######################################################################################################
+
+## 8. Data Analysis
+
+# 1. Data exploration
+# 2. Plotting data
+# 3. Simple linear regression
+# 4. Multiple linear regression
+# 5. Comparing models
+
+
+## 1. Data exploration:
+
+
+View(swiss)                           # View the "swiss" dataset
+attach(swiss)                         # R memorizes your "swiss" dataset
+colnames(swiss)                       # Column names for the "swiss" data set
+dim(swiss)                            # Dimension of the "swiss" dataset
+plot(swiss)                           # Plot the data 
+
+
+## 2. Plotting data:
+
+
+plot(swiss, main="Swiss Fertility and Socioeconomic Indicators Data")
+hist(Fertility, main="Fertility")   # Histogram of Fertility in "swiss" data set
+
+
+## 3. Simple linear regression:
+
+
+m1 <- lm(swiss$Fertility ~ Education , data=swiss)  # Simple linear model
+summary(m1)                                         # Summary statistics of the model
+plot(m1,1)                                          # Plotting the residuals     
+plot(m1,2)
+plot(m1,3)
+plot(m1,4)
+plot(m1)
+plot(Fertility, main="Regression of Fertility on Education", xlab = "Education", ylab="Fertility")
+abline(m1, col=2)                                   # abline adds a line on your plot
+
+## 4. Multiple linear regression:
+
+m2 <- lm(swiss$Fertility ~ Education + Agriculture) # Multiple linear regression
+summary(m2)
+plot(residuals(m2))
+
+
+## 5. Comparing models
+
+plot(Fertility)                        # Plotting Fertility *** Data Viz
+fit = fitted(m2)                       # Look at the multiple linear regression model
+points(fit, col = 2, pch=10)           # Plot the multiple linear regression model
+points(fitted(m1), col=4)              # Plot the simple linear regression model
+
+# ANOVA for m1 and m2 (simple linear regression and multiple linear regression)
+
+anova(m1)     # ANOVA m1
+anova(m2)     # ANOVA m2
+anova(m1, m2) # ANOVA which tests whether m2 is better model than m1
+
+# Data manipulation (optional)
+
+mean(Education)
+summary(Education)
+plot(density(Education))
+
+Education_class <- "I don't know yet"
+Education_class[Education <= 10] <- "Average"
+Education_class[Education > 10] <- "Advance"
+table(Education_class)
+factor(Education_class)
+
+# Logistic regression with Education that is factored (opitional)
+
+m_new <- lm(Fertility ~ Education_class, data = swiss)
+summary(m_new)
+plot(m_new, 1)
+plot(m_new, 2)
+
+Education_binary <- "I don't know yet"
+Education_binary[Education_class == "Average"] <- 0
+Education_binary[Education_class == "Advance"] <- 1
+Education_binary
+?as.numeric
+as.numeric(Education_binary)
+?as.factor
+Education_binary <- factor(Education_binary)
+Education_binary
+?table
+table(Education_binary)
+?prop.table
+prop.table(table(Education_binary))
+
+# GLM Logistic Regression Explanation (optional)
+
+m_education <- glm(Education_binary ~ Fertility, data = swiss, family = binomial)
+summary(m_education)
+plot(m3, 1)
+plot(m3, 2)
+exp(m_education$coefficients)
+
+
+#######################################################################################################
+
+
+## 9. Exercises (15 minutes)
+
+# 1. Form small groups
+# 2. Work together on the following problem sets
+
+
+# Exercise 1:
+
+
+data(fruitfly)
+
+
+# 1. What are the variable names of the "fruitfly" data set?
+
+# 2. What are the dimensions of the "fruitfly" data set?
+
+# 3.Perform a simple linear regression. Analyze the ANOVA and discuss.
+
+# data sources for R: http://www.inside-r.org/howto/finding-data-internet
+
+# Exercise 2: Introduction to Kaggle and the Titanic dataset / motivator for next workshop
+
+# 1. Go to www.Kaggle.com
+# 2. Make an account on the Kaggle website
+# 3. Search for the Titanic tutorial and download the data (train.csv and test.csv) from the website
+# 4. Make a folder in your R folder on your desktop called Kaggle and put the data inside there
+# 5. Load data into R
+
+# Next workshop we will go through advance R methods and go through a data science competition and make a submission
+
+
+
+
