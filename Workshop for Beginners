@@ -4,228 +4,185 @@
 # 1. Introduce R
 # 2. Install R and R studio
 # 3. Introduce R studio environment
-# 4. Introduce vectors and data frames
-# 5. Vector and data frame exercises
-# 6. Introduce packages
-# 7. Introduce importing data 
-# 8. Data Analysis / Chalkboard introduction to regression y ~ XB
-# 9. Introduction to data frames and vectors (optional)
-# 10. Exercises
+# 4. Introduction to R programming
+# 5. Exercises
+# 6. Data importation
+
+#######################################################################################################
+
+
+## 1. Introduce R
+#
+# R is an open source statistical programming language. It is a high level programming language that relies on libraries
+# and functions to perform most of its computational tasks. R is similar to Python.
+#
+##
 
 
 #######################################################################################################
 
 
-## 4. Data frames and vectors (basics)
+## 2. Install R
+#
+# You can download R for mac here: https://cran.r-project.org/bin/macosx/
+# Click on R-3.2.2.pkg
+#
+# You can download R for pc here: https://cran.r-project.org/bin/windows/base/
+# Click on R for Windows
+#
+# You can download R studio here for both mac and pc: https://www.rstudio.com/products/rstudio/download/
+#
+##
 
+
+#######################################################################################################
+
+
+## 3. Introduce R studio environment
+#
+# We recommend using R studio for any programming or analysis using R. R studio is an 
+# integrate development environment (IDE) which provides an easier programming experience.
+#
+##
+
+# 1. The panels inside R studio
+#
+# 2. Work studio Panel
+# - Run
+# - Source
+#
+# 3. Console Panel
+# - Blue code (good code)
+# - Red code (bad code)
+#
+# 4. Environment Panel
+# - History
+# - Import data
+# - Clear environment
+#
+# 5. 
+# - Files 
+# - Plots
+# - Packages
+# - Help
+# - Viewer
+
+
+#######################################################################################################
+
+
+## 4. Introduction to R programming
+
+# How to run our first program
+x <- 1
+x
+x + x
+y <- "hello world"
+y
+print("hello world")
+
+# Introduce "?" the question mark
 ?
-# = comments
-
 ?c
+z <- c(1, 2, 3, 4, 5)
+z
 
-my_first_vector <- c(1, 2, 3, 4, 5)
-my_first_vector
-my_second_vector <- c("my", "second", "vector", "is", "cool")
-my_second_vector
+# Introduce the for loop in R : this for loop makes a vector with values 1 - 5
+v <- c()
+for (i in 1:5){
+  v[i] <- i
+}
+v
 
-?data.frame
-mydata <- data.frame(my_first_vector, my_second_vector)
-mydata
-write.csv(mydata, file = "mydata.csv", row.names = FALSE)
+### Exercise: Can you make a vector filled with the first 10 even numbers starting with 2 and ending with 20 using a for loop?
+even <- c()
+for (i in 1:19){
+  even[i] <- i + 1
+}
+even
 
-## 5. Exercise
-# 1. Get into groups of 5 people
-# 2. Ask what everyone's first name is
-# 3. Create a vector with everyone's first name
-# 4. Ask for everyone's age
-# 5. Make another vector in the same order of the first name's with everyone's name
-# 6. Make a data.frame
-# 7. Make a csv file
+# Introduction to data frames
+# Remember our variable called z which is a vector? Let's make another variable and go ahead make a data frame using these vectors.
+z
+g <- c(10, 9, 8, 7, 6, 5)
+g
+data <- data.frame(z, g)
+data
+View(data)
+colnames(data)
+data$z
+data$g
 
-your.name <- c("a", "b", "c", "d", "e", "f")
-your.age <- c("1", "2", "3", "4", "5", "6")
-submit <- data.frame(your.name, your.age)
-write.csv(submit, file = "ages.csv", row.names = FALSE)
+# Let's look at the first entry in the vector called z
+data$z[1]
 
+# Let's change the first entry of vector z from 1 to 2
+data$z[1] <- 2
 
-#######################################################################################################
+### Exercise: How do you create rename vector z and g to small and large?
+z <- "small"
+g <- "large"
+small
+large
 
+### Exercise: Change the last entry in vector "small" (or z) to 12
+length(small)
+data$small[5] <- 12
+data$small
 
-## 6. Loading Packages
+# Clear all your variables by pressing the broom on the top right corner of R studio
 
-# 1. Install packages either using package button or script
-# 2. Import library
-
-install.packages('faraway')
-install.packages('alr4')
-library(alr4)
-library(faraway)
-
-
-#######################################################################################################
-
-## 7. Data importing
-
-# 1. Make a folder called R on your desktop
-# 2. Save your R program in the R folder on your desktop
-# 3. Download "swiss.csv" on the www.bustats.com and put it into your R file
-
-
-setwd("~/Desktop/R")            # Set work directory
-list.files()                    # Check files in work directory
-swiss <- read.csv("swiss.csv")  # Import csv "swiss" data set
-?swiss                          # Ask R what the "swiss" data set is about
-
-# = comments
-
-
-#######################################################################################################
-
-## 8. Data Analysis
-
-# 1. Data exploration
-# 2. Plotting data
-# 3. Simple linear regression
-# 4. Multiple linear regression
-# 5. Comparing models
+### Exercise: Get into groups of 5 people.
+# 1. Introduce yourself
+# 2. Ask for everyone's name.
+# 3. Make a vector with everyone's name. Call the vector your_name. Remember to use quotation marks for strings like in our hello world example.
+# 4. Ask for everyone's age.
+# 5. Make a vector with everyone's age. Call the vector your_age
+# 6. Make a data frame with your two new vectors and call it mydata 
+###
 
 
-## 1. Data exploration:
-
-
-View(swiss)                           # View the "swiss" dataset
-attach(swiss)                         # R memorizes your "swiss" dataset
-colnames(swiss)                       # Column names for the "swiss" data set
-dim(swiss)                            # Dimension of the "swiss" dataset
-plot(swiss)                           # Plot the data 
-
-
-## 2. Plotting data:
-
-
-plot(swiss, main="Swiss Fertility and Socioeconomic Indicators Data")
-hist(Fertility, main="Fertility")   # Histogram of Fertility in "swiss" data set
-
-
-## 3. Simple linear regression:
-
-
-m1 <- lm(swiss$Fertility ~ Education , data=swiss)  # Simple linear model
-summary(m1)                                         # Summary statistics of the model
-plot(m1,1)                                          # Plotting the residuals     
-plot(m1,2)
-plot(m1,3)
-plot(m1,4)
-plot(m1)
-plot(Fertility, main="Regression of Fertility on Education", xlab = "Education", ylab="Fertility")
-plot(residuals(m1))
-
-## 4. Multiple linear regression:
-
-m2 <- lm(swiss$Fertility ~ Education + Agriculture, data = swiss) # Multiple linear regression
-summary(m2)
-plot(residuals(m2))
-
-
-## 5. Comparing models
-
-plot(Fertility)                        # Plotting Fertility *** Data Viz
-fit = fitted(m2)                       # Look at the multiple linear regression model
-points(fit, col = 2, pch=10)           # Plot the multiple linear regression model
-points(fitted(m1), col=4)              # Plot the simple linear regression model
-
-# ANOVA for m1 and m2 (simple linear regression and multiple linear regression)
-
-anova(m1)     # ANOVA m1
-anova(m2)     # ANOVA m2
-anova(m1, m2) # ANOVA which tests whether m2 is better model than m1
-
-# Data manipulation (optional)
-
-?mean
-mean(Education)
-?summary
-summary(Education)
-plot(density(Education))
-
-Education_class <- "I don't know yet"
-Education_class
-Education_class[Education <= 10] <- "Average"
-Education_class
-Education_class[Education > 10] <- "Advance"
-Education_class
-?table
-?factor
-table(Education_class)
-factor(Education_class)
+### Exercise: 
+# 1. Find your name in the data frame.
+# 2. Change your name to Khaleesi (from Game of Thrones)
+# 3. 
+###
 
 
 #######################################################################################################
 
 
-# Logistic regression with Education that is factored (opitional)
+## 6. Data importation 
+# 1. Create a file called "R" on your desktop.
 
-m_new <- lm(Fertility ~ Education_class, data = swiss)
-summary(m_new)
-plot(m_new, 1)
-plot(m_new, 2)
+# Find your working directory
+getwd()
 
-Education_binary <- "I don't know yet"
-Education_binary[Education_class == "Average"] <- 0
-Education_binary[Education_class == "Advance"] <- 1
-Education_binary
-?as.numeric
-as.numeric(Education_binary)
-?as.factor
-Education_binary <- factor(Education_binary)
-Education_binary
-?table
-table(Education_binary)
-?prop.table
-prop.table(table(Education_binary))
+# Copy your working directory mine is: "/Users/kevin/Desktop/R"
 
-# GLM Logistic Regression Explanation (optional)
+# For mac
+setwd("/Users/kevin/Desktop/R")
 
-m_education <- glm(Education_binary ~ Fertility, data = swiss, family = binomial)
-summary(m_education)
-plot(m3, 1)
-plot(m3, 2)
-exp(m_education$coefficients)
+# For pc
+setwd("C:Users/kevin/Desktop/R")
+
+# Write the csv file
+write.csv(mydata, "mydata.csv")
+
+# Check your R file on your desktop
+
+# Read the csv file back into your computer
+# 1. Save your R file by clicking file and then "save as". Save the file in your R file on the desktop.
+
+newdata <- read.csv("mydata.csv")
+newdata
+View(newdata)
 
 
 #######################################################################################################
 
-
-## 9. Exercises (15 minutes)
-
-# 1. Form small groups
-# 2. Work together on the following problem sets
-
-
-# Exercise 1:
-
-
-data(fruitfly)
-
-
-# 1. What are the variable names of the "fruitfly" data set?
-
-# 2. What are the dimensions of the "fruitfly" data set?
-
-# 3.Perform a simple linear regression. Analyze the ANOVA and discuss.
-
-# data sources for R: http://www.inside-r.org/howto/finding-data-internet
-
-# Exercise 2: Introduction to Kaggle and the Titanic dataset / motivator for next workshop
-
-# 1. Go to www.Kaggle.com
-# 2. Make an account on the Kaggle website
-# 3. Search for the Titanic tutorial and download the data (train.csv and test.csv) from the website
-# 4. Make a folder in your R folder on your desktop called Kaggle and put the data inside there
-# 5. Load data into R
-
-# Next workshop we will go through advance R methods and go through a data science competition and make a submission
-
+### Stay tuned for our next workshop R for Intermediate. We are going to go into libraries in R, install packages,
+### and introduction to data analysis.
 
 
 
