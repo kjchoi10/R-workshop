@@ -1,0 +1,260 @@
+# BUSC Workshop R for Intermerdiate and introduction to statistics and data analysis
+
+### Outline:
+# 1. Introduce R
+# 2. Install R
+# 3. Introduction to R studio
+# 4. Introduction to R for intermerdiate
+# 5. Installing packages and using libraries
+# 6. Introduction to data analysis
+# 7. Introduction to data manipulation
+
+
+#######################################################################################################
+
+
+## 1. Introduce R
+#
+# R is an open source statistical programming language. It is a high level programming language that relies on libraries
+# and functions to perform most of its computational tasks. R is similar to Python.
+#
+##
+
+
+#######################################################################################################
+
+
+## 2. Install R
+#
+# You can download R for mac here: https://cran.r-project.org/bin/macosx/
+# Click on R-3.2.2.pkg
+#
+# You can download R for pc here: https://cran.r-project.org/bin/windows/base/
+# Click on R for Windows
+#
+# You can download R studio here for both mac and pc: https://www.rstudio.com/products/rstudio/download/
+#
+##
+
+
+#######################################################################################################
+
+
+## 3. Introduce R studio environment
+#
+# We recommend using R studio for any programming or analysis using R. R studio is an 
+# integrate development environment (IDE) which provides an easier programming experience.
+#
+##
+
+# 1. The panels inside R studio
+#
+# 2. Work studio panel (top)
+# - Run
+# - Source
+#
+# 3. Console panel (bottom)
+# - Blue code (good code)
+# - Red code (bad code)
+#
+# 4. Environment panel (top right)
+# - History
+# - Import data
+# - Clear environment
+#
+# 5. File viewer panel (bottom right)
+# - Files 
+# - Plots
+# - Packages
+# - Help
+# - Viewer
+
+
+#######################################################################################################
+
+
+## 4. Introduction to R for intermerdiate
+# People should be familiar with vectors and using the "c" operation in R. They should know what data frames are, and
+# they should be able to view their data using either the "View" or "colnames" function. Lastly, students should know
+# how to setup their working directory and import and export data.
+# 
+# In this workshop we will introduce students to data analysis in R. The workshop requires some statistics knowledge
+# including regression and the analysis of variance. Some topics we will cover are libraries and packages in R, regression, plots,
+# model comparision, and an introduction to data cleaning.
+##
+
+
+#######################################################################################################
+
+
+## 5. Installing packages and uploading libraries
+
+# 1. Installing packages
+# Go your bottom right panel (i.e. panel should say files, plots, packages, help, viewer)
+# Click on packages.
+# Click on install.
+# Type "faraway".
+# Click on install.
+# Repeat these processes and type "alr".
+
+# 2. Using libraries
+# Type the following and then run.
+
+library(faraway)
+library(alr4)
+
+# Note: if you don't get red text your library is wokring. Red text is not bad, it just means you have warnings or possibly errors.
+# There are many more libraries you can use and you search through them by clicking on packages.
+
+#######################################################################################################
+
+
+## 6. Introduction to data analysis
+
+# Set work directory
+# 1. Create a file called "R" on your desktop.
+
+# Find your working directory
+getwd()
+
+# Copy your working directory and change it to show "/Desktop/R" at the end;  mine is: "/Users/kevin/Desktop/R"
+
+# For mac
+setwd("/Users/kevin/Desktop/R")
+
+# For pc
+setwd("C:Users/kevin/Desktop/R")
+
+# Let's look at some data 
+?swiss
+
+# Import the "swiss" dataset
+data(swiss)
+
+# View the data in a similar excel spreadsheet
+View(swiss)
+
+# Look at the names of the variables (these are columns)
+colnames(swiss)
+
+# Look at the dimension of the variables
+dim(swiss)
+
+# Plot the data
+plot(swiss)
+
+# Plot just one variable Fertility; remember to use the "$"
+plot(swiss$Fertility)
+
+# Plot a histogram of Ferility
+hist(swiss$Fertility)
+
+### Regression
+
+# Motivation: We are interested in learning more about the variable Fertility, but we need some tools to learn more about
+# fertility. Thus, we use regression. Regression studies the linear relationship between some response variable (y) and
+# some explanatory variable (x). 
+
+
+
+# Introduction to Regression
+# 1. The classic example for regression is: Y ~ AX + B
+# 2. In general, we allow regression to follow the form: Y ~ B0 + X1*B1 + X2*B2 + ... + Xn*Bn + e (where e is some error)
+# 3. The B are the coefficients that your regression model will give you.
+# 4. Even more general, we express regression with linear algebra Y ~ X^T*B (where X^T is a vector of data for B)
+# 5. The easiest type of regression is linear regression.
+
+
+
+# Linear regression
+?lm
+
+# First regression model
+model <- lm(Fertility ~ Education , data = swiss)
+
+# Look at the output of our regression model
+summary(model)
+
+
+
+### Exercise: Analyze the output of the model:
+# 1. What is the estimate and what is it telling you about the model? 
+# 2. What is the standard error? P-value? 
+# 3. Can you tell your neighbors what the p-value is telling you about variable "Education"? 
+# 4. What is the R^2 and what can we interpret from that? Lastly, what are some other things you'd to do with your model?
+
+
+
+# Plotting our model gives some graphs about well our model fits with real data
+plot(model)
+
+# The most important plots are plot(model, 1) and plot(model, 2).
+# Note: Lots of functions like "plot" have multiple parameters that you can fill up like plot(model, 1). These are
+# specific commands you are telling R. In this case, we want to look at a plot of "model" and just the first plot.
+plot(model, 1)
+plot(model, 2)
+
+
+
+### Exercise: Make a new model:
+# 1. Can you make another model (call it model_2) and include both the variable "Education" and "Infant.Mortality".
+# 2. Analyze the summary of model_2 and discuss with your neighbors.
+# 3. Plot the model especially plot number 1 and 2. Discuss the plots with your neighbors.
+
+
+#######################################################################################################
+
+
+
+# 7. Introduction to Data manipulation
+
+# Note: most of your work with real data will be spent here. This is where most of your programming and problem solving
+# skills will shine.
+
+?mean
+mean(Education)
+?summary
+summary(Education)
+plot(density(Education))
+
+Education_class <- "I don't know yet"
+Education_class
+Education_class[Education <= 10] <- "Average"
+Education_class
+Education_class[Education > 10] <- "Advance"
+Education_class
+?table
+?factor
+table(Education_class)
+factor(Education_class)
+
+
+#######################################################################################################
+
+## 10. Take home exercises:
+
+# Exercise 1:
+
+data(fruitfly)
+
+
+# 1. What are the variable names of the "fruitfly" data set?
+
+# 2. What are the dimensions of the "fruitfly" data set?
+
+# 3.Perform a simple linear regression. Analyze the ANOVA and discuss.
+
+# data sources for R: http://www.inside-r.org/howto/finding-data-internet
+
+# Exercise 2: Introduction to Kaggle and the Titanic dataset / motivator for next workshop
+
+# 1. Go to www.Kaggle.com
+# 2. Make an account on the Kaggle website
+# 3. Search for the Titanic tutorial and download the data (train.csv and test.csv) from the website
+# 4. Make a folder in your R folder on your desktop called Kaggle and put the data inside there
+# 5. Load data into R
+
+# Next workshop we will go through advance R methods and go through a data science competition and make a submission
+
+
+
