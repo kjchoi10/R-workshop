@@ -92,14 +92,14 @@ v <- c()
 for (i in 1:5){
   v[i] <- i
 }
-v
+print(v)
 
 ### Exercise: Can you make a vector filled with the first 10 even numbers starting with 2 and ending with 20 using a for loop?
 even <- c()
 for (i in 1:19){
   even[i] <- i + 1
 }
-even
+print(even)
 
 # Introduction to data frames
 # Remember our variable called z which is a vector? Let's make another variable and go ahead make a data frame using these vectors.
