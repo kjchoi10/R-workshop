@@ -47,20 +47,20 @@
 
 # 1. The panels inside R studio
 #
-# 2. Work studio Panel
+# 2. Work studio panel (top)
 # - Run
 # - Source
 #
-# 3. Console Panel
+# 3. Console panel (bottom)
 # - Blue code (good code)
 # - Red code (bad code)
 #
-# 4. Environment Panel
+# 4. Environment panel (top right)
 # - History
 # - Import data
 # - Clear environment
 #
-# 5. 
+# 5. File viewer panel (bottom right)
 # - Files 
 # - Plots
 # - Packages
