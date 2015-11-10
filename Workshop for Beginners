@@ -87,65 +87,66 @@ print("hello world")
 z <- c(1, 2, 3, 4, 5)
 z
 
-# Introduce the for loop in R : this for loop makes a vector with values 1 - 5
-v <- c()
-for (i in 1:5){
-  v[i] <- i
-}
-print(v)
 
-### Exercise: Can you make a vector filled with the first 10 even numbers starting with 2 and ending with 20 using a for loop?
-even <- c()
-for (i in 1:19){
-  even[i] <- i + 1
-}
-print(even)
+# Introduction to accessing values in vectors
+z[1]
+z[2]
+
+
+### Exercise: Can you access the last value in the vector called "z"?
+z[5]
+
+# Changing values inside a vector
+z[1] <- 0
+z
 
 # Introduction to data frames
-# Remember our variable called z which is a vector? Let's make another variable and go ahead make a data frame using these vectors.
+# Let's make another variable and go ahead make a data frame using these vectors "z" and "g"
+
+# Here is the vector "z" which we already made
 z
-g <- c(10, 9, 8, 7, 6, 5)
+
+### Exercise: Can you make a vector called "g" and fill it up with values from 10 to 15?
+g <- c(10, 11, 12, 13, 14, 15)
 g
+
+# Combine the two vectors "z" and "g" into a data frame
 data <- data.frame(z, g)
 data
+
+# View your new data frame
 View(data)
+
+# The colnames of your data
 colnames(data)
+
+# Accessing the individual columns of your data
 data$z
 data$g
 
 # Let's look at the first entry in the vector called z
 data$z[1]
 
-# Let's change the first entry of vector z from 1 to 2
+# Let's change the first entry of vector z to 2
 data$z[1] <- 2
 
-### Exercise: How do you create rename vector z and g to small and large?
-z <- "small"
-g <- "large"
-small
-large
-
-### Exercise: Change the last entry in vector "small" (or z) to 12
-length(small)
-data$small[5] <- 12
-data$small
 
 # Clear all your variables by pressing the broom on the top right corner of R studio
 
-### Exercise: Get into groups of 5 people.
+
+### Exercise 1: Get into groups of 5 people.
 # 1. Introduce yourself
 # 2. Ask for everyone's name.
 # 3. Make a vector with everyone's name. Call the vector your_name. Remember to use quotation marks for strings like in our hello world example.
 # 4. Ask for everyone's age.
 # 5. Make a vector with everyone's age. Call the vector your_age
-# 6. Make a data frame with your two new vectors and call it mydata 
+# 6. Make a data frame with your two new vectors and call it data
 ###
 
 
-### Exercise: 
+### Exercise 2: 
 # 1. Find your name in the data frame.
-# 2. Change your name to Khaleesi (from Game of Thrones)
-# 3. 
+# 2. Change your name to "Matilda"
 ###
 
 
@@ -166,18 +167,35 @@ setwd("/Users/kevin/Desktop/R")
 # For pc
 setwd("C:Users/kevin/Desktop/R")
 
-# Write the csv file
-write.csv(mydata, "mydata.csv")
+# Write the csv file of the data you made from the group exercise
+write.csv(data, "data.csv")
 
 # Check your R file on your desktop
 
 # Read the csv file back into your computer
 # 1. Save your R file by clicking file and then "save as". Save the file in your R file on the desktop.
 
-newdata <- read.csv("mydata.csv")
+newdata <- read.csv("data.csv")
 newdata
 View(newdata)
 
+
+#######################################################################################################
+# Extra material questions about for loops
+
+# Introduce the for loop in R : this for loop makes a vector with values 1 - 5
+v <- c()
+for (i in 1:5){
+  v[i] <- i
+}
+print(v)
+
+### Exercise: Can you make a vector filled with the first 10 even numbers starting with 2 and ending with 20 using a for loop?
+even <- c()
+for (i in 1:19){
+  even[i] <- i + 1
+}
+print(even)
 
 #######################################################################################################
 
